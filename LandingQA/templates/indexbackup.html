@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>Question-Answering System</title>
+	{% load static %}
+	<link rel="stylesheet" href="{% static 'css/main.css' %}" />
+</head>
+
+<body>
+	<div class="container">
+		<header>
+			<h1>Question-Answering System</h1>
+			<p class="subtitle">Get answers about a document</p>
+		</header>
+
+		<main>
+			<form method="POST" action="{% url 'qa' %}">
+				{% csrf_token %}
+				<input type="text" name="query" placeholder="Type your question here" required>
+				<button type="submit">Submit</button>
+			</form>
+
+			{% if answer %}
+			<section class="answer-section">
+				<h2>Answer:</h2>
+				<div class="answer-container">
+					<p class="typewriter">{{ answer }}</p>
+				</div>
+			</section>
+			{% else %}
+			<section class="no-answer-section">
+				<p class="no-answer-message">No answer found.</p>
+			</section>
+			{% endif %}
+		</main>
+
+		<footer>
+			<p>&copy; 2023 Question-Answering System</p>
+		</footer>
+	</div>
+	<!-- Scripts -->
+</body>
+
+</html>
